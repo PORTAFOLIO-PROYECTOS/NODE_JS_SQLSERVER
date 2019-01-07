@@ -1,5 +1,5 @@
 const SQL = {
-    connection: "Server=.;Database=NodeJS_SQL;Encrypt=true"
+    connection: "Data Source=HUGOROCA; Initial Catalog=NodeJS_SQL; Integrated Security=true"
 }
 
 module.exports = SQL;

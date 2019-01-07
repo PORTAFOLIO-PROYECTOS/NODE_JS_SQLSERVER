@@ -1,17 +1,8 @@
-let sql = require('mssql');
+const sql = require('mssql');
+const config = require("./config");
 
-// const connectionString = 'mssql://{user-name}:{password}@{db-server-ip}:{sql-server-port}/{db-name}';
-const connectionString = `Server=AWNTS74;Database=BelcorpPeru;User ID=sa;Password=C0n$ult0r@$;Encrypt=true`;
-//const connectionString = `Server=AWNTS77;Database=BelcorpPeru;User ID=usrportalconsultorasppr;Password=Belcorp2016;Encrypt=true`;
-
-const config = {
-    user: 'usrportalconsultorasppr',
-    password: 'Belcorp2016',
-    server: 'AWNTS77', 
-    database: 'BelcorpPeru',
-    options: {
-        encrypt: true
-    }
+function connect_sql(){
+    return sql.connect(config.connection);
 }
 
 sql.on('error', err => {
@@ -20,9 +11,9 @@ sql.on('error', err => {
 });
 
 function get(){
-    sql.connect(connectionString).then(pool => {
+    connect_sql().then(pool => {
         return pool.request()
-            .query('select * from configuracionpaisdatos');
+            .query('select * from test');
     }).then(result => {
         sql.close();
         console.log(result.recordset);
