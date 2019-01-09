@@ -1,5 +1,5 @@
-const SQL = {
-    connection: "Data Source=HUGOROCA; Initial Catalog=NodeJS_SQL; Integrated Security=true"
+const config = {
+    connectionSQL: "Data Source=AWNTS74;Initial Catalog=BelcorpPeru;Persist Security Info=True;User ID=sa;Password=C0n$ult0r@$;"
 }
 
-module.exports = SQL;
+module.exports = config;

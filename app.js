@@ -1,26 +1,15 @@
-const sql = require('mssql');
+"use strict";
+
 const config = require("./config");
+const sqlConnection = require("./sql");
+const sql = new sqlConnection(config.connectionSQL);
 
-function connect_sql(){
-    return sql.connect(config.connection);
-}
-
-sql.on('error', err => {
-    console.dir(err);
-    sql.close();
-});
-
-function get(){
-    connect_sql().then(pool => {
-        return pool.request()
-            .query('select * from test');
-    }).then(result => {
+(async () => {
+    try {
+        let select = await sql.selectById("test", 14);
+        console.log(select.recordset);
+    } catch (error) {
         sql.close();
-        console.log(result.recordset);
-    }).catch(err => {
-        console.dir(err);
-        sql.close();
-    });
-}
-
-get();
+        console.log(error);
+    }
+})();
