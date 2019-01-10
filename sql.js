@@ -63,4 +63,19 @@ module.exports = class Sql {
         });
     }
 
+    async execStoreProcedureById(storeProcedure, parameter){
+        return new Promise((resolve, reject) => {
+            this.connect().then(pool => {
+                return pool.request()
+                    .input("id", mssql.Int, parameter)
+                    .execute(storeProcedure);
+            }).then(result => {
+                mssql.close();
+                resolve(result);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
+
 }

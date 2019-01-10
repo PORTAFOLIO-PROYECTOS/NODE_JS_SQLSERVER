@@ -6,7 +6,7 @@ const sql = new sqlConnection(config.connectionSQL);
 
 (async () => {
     try {
-        let select = await sql.selectById("test", 1);
+        let select = await sql.execStoreProcedureById("USP_Test_ListById", 1);
         console.log(select.recordset);
     } catch (error) {
         sql.close();
