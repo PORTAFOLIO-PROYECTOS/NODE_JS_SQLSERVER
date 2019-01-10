@@ -50,4 +50,17 @@ module.exports = class Sql {
         }
     }
 
+    async execStoreProcedure(storeProcedure){
+        return new Promise((resolve, reject) => {
+            this.connect().then(pool => {
+                return pool.request().execute(storeProcedure);
+            }).then(result => {
+                mssql.close();
+                resolve(result);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
+
 }
